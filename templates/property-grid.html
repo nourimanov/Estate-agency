@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single">Our Amazing Properties</h1>
+                        <span class="color-text-a">Grid Properties</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'index' %}">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Properties Grid
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Intro Single-->
+
+    <!-- ======= Property Grid ======= -->
+    <section class="property-grid grid">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="grid-option">
+                        <form action="{% url 'property_grid' %}" method="GET">
+                            <div class="row justify-content-end">
+                                <div class="col-md-6">
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">
+                                            <label for="min_price">Min Price:</label>
+                                            <input class="form-control" type="number" name="min_price" id="min_price">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="max_price">Max Price:</label>
+                                            <input class="form-control" type="number" name="max_price" id="max_price">
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success" type="submit">Filter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% for category in page_obj %}
+                    <div class="col-md-4">
+                        <div class="card-box-a card-shadow">
+                            <div class="img-box-a">
+                                <img src="{{ category.image.url }}" alt="" class="img-a img-fluid">
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-overlay-a-content">
+                                    <div class="card-header-a">
+                                        <h2 class="card-title-a">
+                                            <span class="color-b">{{ category.name }}</span><br> {{ category.location }}
+                                        </h2>
+                                    </div>
+                                    <div class="card-body-a">
+                                        <div class="price-box d-flex">
+                                            <span class="price-a">rent | $ {{ category.price }}</span>
+                                        </div>
+                                        <a href="{% url 'property_single' category.id %}" class="link-a">Click here to
+                                            view
+                                            <span class="bi bi-chevron-right"></span>
+                                        </a>
+                                    </div>
+                                    <div class="card-footer-a">
+                                        <ul class="card-info d-flex justify-content-around">
+                                            <li>
+                                                <h4 class="card-info-title">Area</h4>
+                                                <span>{{ category.area }}
+                          <sup>2</sup>
+                        </span>
+                                            </li>
+                                            <li>
+                                                <h4 class="card-info-title">Room</h4>
+                                                <span>{{ category.room }}</span>
+                                            </li>
+                                            <li>
+                                                <h4 class="card-info-title">Floor</h4>
+                                                <span>{{ category.floor }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <nav class="pagination-a">
+                        <ul class="pagination justify-content-end">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">
+                                        <span class="bi bi-chevron-left"></span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="page-item">
+                                <a class="page-link" href="#">{{ page_obj.number }}</a>
+                            </li>
+                            {% if page_obj.has_next %}
+                                <li class="page-item next">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                        <span class="bi bi-chevron-right"></span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Property Grid Single-->
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+{% endblock %}

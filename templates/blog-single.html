@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single">{{ blog.title }}</h1>
+                        <span class="color-text-a">{{ blog.category }}</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'index' %}">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                {{ blog.title }}
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Intro Single-->
+
+    <!-- ======= Blog Single ======= -->
+    <section class="news-single nav-arrow-b">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="news-img-box">
+                        <img src="{{ blog.image.url }}" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                    <div class="post-information">
+                        <ul class="list-inline text-center color-a">
+                            <li class="list-inline-item mr-2">
+                                <strong>Author: </strong>
+                                <span class="color-text-a">{{ author.fullname }}</span>
+                            </li>
+                            <li class="list-inline-item mr-2">
+                                <strong>Category: </strong>
+                                <span class="color-text-a">{{ blog.category }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="post-content color-text-a">
+                        <p class="post-intro">
+                            <strong>{{ blog.title }}</strong>
+                        </p>
+                        <p>
+                            {{ blog.about }}
+                        </p>
+                        <blockquote class="blockquote">
+                            <footer class="blockquote-footer">
+                                <strong>{{ author.fullname }}</strong>
+                            </footer>
+                            <br>
+                            <footer class="blockquote-footer">
+                                <strong>{{ blog.created_at }}</strong>
+                            </footer>
+                        </blockquote>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-share">
+                            <span>Share: </span>
+                            <ul class="list-inline socials">
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="bi bi-instagram" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="bi bi-linkedin" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+                    <div class="title-box-d">
+                        <h3 class="title-d">Comments ({{ comments_count }})</h3>
+                    </div>
+                    <div class="box-comments">
+                        {% for comment in comments %}
+                            <ul class="list-comments">
+                                <li>
+                                    <div class="comment-avatar">
+                                        <img src="{% static 'icon-user-default.png' %}" alt="">
+                                    </div>
+                                    <div class="comment-details">
+                                        <h4 class="comment-author">{{ comment.fullname }}</h4>
+                                        <h7 class="comment-email">{{ comment.email }}</h7>
+                                        <br><h6 class="comment-description">{{ comment.created_at|date }}</h6>
+                                        <p class="comment-description">
+                                            {{ comment.text }}
+                                        </p>
+                                        {#                                    <a href="3">Reply</a>#}
+                                    </div>
+                                </li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                    <div class="form-comments">
+                        <div class="title-box-d">
+                            <h3 class="title-d"> Comment</h3>
+                        </div>
+                        <form class="form-a" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="inputName">Enter fullname</label>
+                                        <input type="text" class="form-control form-control-lg form-control-a"
+                                               id="inputName" name="fullname" placeholder="Name *" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="inputEmail1">Enter email</label>
+                                        <input type="email" class="form-control form-control-lg form-control-a"
+                                               id="inputEmail1" name="email" placeholder="Email *" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <div class="form-group">
+                                        <label for="textMessage">Enter message</label>
+                                        <textarea id="textMessage" class="form-control" placeholder="Comment *"
+                                                  name="text" cols="45" rows="8" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-a">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Blog Single-->
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+{% endblock %}

@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single">{{ category.name }}</h1>
+                        <span class="color-text-a">{{ category.location }}</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'index' %}">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'property_grid' %}">Properties</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                {{ category.name }}
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Intro Single-->
+
+    <!-- ======= Property Single ======= -->
+    <section class="property-single nav-arrow-b">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div id="property-single-carousel" class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="carousel-item-b swiper-slide">
+                                <img src="{{ category.image.url }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-single-carousel-pagination carousel-pagination"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="row justify-content-between">
+                        <div class="col-md-5 col-lg-4">
+                            <div class="property-price d-flex justify-content-center foo">
+                                <div class="card-header-c d-flex">
+                                    <div class="card-box-ico">
+                                        <span class="bi bi-cash">$</span>
+                                    </div>
+                                    <div class="card-title-c align-self-center">
+                                        <h5 class="title-c">{{ category.price }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-summary">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="title-box-d section-t4">
+                                            <h3 class="title-d">Quick Summary</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="summary-list">
+                                    <ul class="list">
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Location:</strong>
+                                            <span>{{ category.location }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Property Type:</strong>
+                                            <span>House</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Status:</strong>
+                                            <span>Sale</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Area:</strong>
+                                            <span>{{ category.area }}
+                          <sup>2</sup>
+                        </span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Floor:</strong>
+                                            <span>{{ category.floor }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Room:</strong>
+                                            <span>{{ category.room }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-lg-7 section-md-t3">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="title-box-d">
+                                        <h3 class="title-d">Property Description</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-description">
+                                <p class="description color-text-a">
+                                    {{ category.about }}
+                                </p>
+                            </div>
+                            <div class="row section-t3">
+                                <div class="col-sm-12">
+                                    <div class="title-box-d">
+                                        <h3 class="title-d">Amenities</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="amenities-list color-text-a">
+                                <ul class="list-a no-margin">
+                                    <li>Balcony</li>
+                                    <li>Outdoor Kitchen</li>
+                                    <li>Cable Tv</li>
+                                    <li>Refrigerator</li>
+                                    <li>Internet</li>
+                                    <li>Parking</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row section-t3">
+                        <div class="col-sm-12">
+                            <div class="title-box-d">
+                                <h3 class="title-d">Contact Agent</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% for owner in category_owner %}
+                            <div class="col-md-6 col-lg-4">
+                                <img src="{{ owner.image.url }}" alt="" class="img-fluid">
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="property-agent">
+                                    <h4 class="title-agent">{{ owner.fullname }}</h4>
+                                    <p class="color-text-a">
+                                        {{ owner.about }}
+                                    </p>
+                                    <ul class="list-unstyled">
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Phone:</strong>
+                                            <span class="color-text-a">{{ owner.phone }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Email:</strong>
+                                            <span class="color-text-a">{{ owner.email }}</span>
+                                        </li>
+                                    </ul>
+                                    <div class="socials-a">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <a href="#">
+                                                    <i class="bi bi-instagram" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#">
+                                                    <i class="bi bi-linkedin" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="col-md-12 col-lg-4">
+                            <div class="property-contact">
+                                <form class="form-a" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-12 mb-1">
+                                            <div class="form-group">
+                                                <input type="file" class="form-control form-control-lg form-control-a"
+                                                       id="inputName" placeholder="Image *" name="image" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-1">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-lg form-control-a"
+                                                       id="inputName" placeholder="Name your family" name="fullname" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-1">
+                                            <div class="form-group">
+                                                <textarea id="textMessage" class="form-control" placeholder="Write good sentences for our team"
+                                                          name="text" cols="45" rows="8" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <button type="submit" class="btn btn-a">Send Message</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Property Single-->
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+{% endblock %}
