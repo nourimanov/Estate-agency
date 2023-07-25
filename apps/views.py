@@ -40,8 +40,12 @@ def agents_grid(request):
 
 
 def blog_grid(request):
-    blogs = Blog.objects.all()
-    return render(request, 'blog-grid.html', {'blogs': blogs})
+    blogs_list = Blog.objects.all()
+    paginator = Paginator(blogs_list, 3)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'blog-grid.html', {'page_obj': page_obj})
 
 
 def blog_single(request, pk):
