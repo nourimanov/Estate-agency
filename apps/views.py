@@ -105,7 +105,7 @@ def property_grid(request):
         if min_price and max_price:
             categories = categories.filter(price__gte=min_price, price__lte=max_price)
 
-    return render(request, 'property-grid.html', {'categories': categories, 'page_obj': page_obj})
+        return render(request, 'property-grid.html', {'categories': categories, 'page_obj': page_obj})
 
 
 def property_single(request, pk):
